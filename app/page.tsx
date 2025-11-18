@@ -28,9 +28,10 @@ export default function JikonifyPage() {
           </p>
         </div>
 
-        {/* QR Code Section */}
+        {/* Download Section */}
         <div className="flex justify-center mb-20">
-          <div className="bg-card border border-border rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          {/* QR Code for larger screens */}
+          <div className="hidden sm:block bg-card border border-border rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
             <div className="bg-white p-6 rounded-xl mb-4">
               <QRCodeSVG
                 value={apkUrl}
@@ -43,6 +44,16 @@ export default function JikonifyPage() {
               Scan to download APK
             </p>
           </div>
+          
+          {/* Download button for small screens */}
+          <a 
+            href={apkUrl}
+            download
+            className="sm:hidden inline-block px-8 py-4 rounded-xl font-sans font-semibold text-white text-lg shadow-lg hover:shadow-xl transition-all"
+            style={{ backgroundColor: '#21412F' }}
+          >
+            Download APK
+          </a>
         </div>
 
         {/* Screenshots Section */}
