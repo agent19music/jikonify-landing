@@ -98,11 +98,12 @@ export default function RecipePage() {
 
   const fetchRecipe = async () => {
     try {
-      // TODO: Replace with actual Supabase API endpoint
-      const response = await fetch(`https://${LANDING_DOMAIN}/api/recipe/${recipeId}`);
+      const response = await fetch(`/api/recipe/${recipeId}`);
       if (response.ok) {
         const data = await response.json();
         setRecipe(data);
+      } else if (response.status === 404) {
+        console.error('Recipe not found');
       }
     } catch (error) {
       console.error('Error fetching recipe:', error);
@@ -270,7 +271,7 @@ export default function RecipePage() {
             <ol className="space-y-4">
               {recipe.instructions.map((step) => (
                 <li key={step.step_number} className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">
+                  <span className="shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">
                     {step.step_number}
                   </span>
                   <span className="text-foreground leading-relaxed">{step.instruction}</span>
