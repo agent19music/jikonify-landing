@@ -105,10 +105,10 @@ function transformRecipe(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const recipeId = params.id;
+    const { id: recipeId } = await params;
 
     if (!supabase) {
       return NextResponse.json(
